@@ -15,15 +15,26 @@ const prisma_service_1 = require("../prisma/prisma.service");
 let GenreService = class GenreService {
     constructor(prisma) {
         this.prisma = prisma;
+        this._include = {
+            games: {
+                select: {
+                    game: true,
+                }
+            }
+        };
     }
-    create(createGenreDto) {
-        return 'This action adds a new genre';
+    create(data) {
+        return this.prisma.genre.create({
+            data,
+        });
     }
     findAll() {
-        return `This action returns all genre`;
+        return this.prisma.genre.findMany();
     }
-    findOne(id) {
-        return `This action returns a #${id} genre`;
+    findOne(idGenre) {
+        return this.prisma.genre.findUnique({
+            where: { idGenre },
+        });
     }
     update(id, updateGenreDto) {
         return `This action updates a #${id} genre`;
