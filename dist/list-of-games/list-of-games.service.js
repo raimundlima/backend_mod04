@@ -9,50 +9,54 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserService = void 0;
+exports.ListOfGamesService = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../prisma/prisma.service");
-let UserService = class UserService {
+let ListOfGamesService = class ListOfGamesService {
     constructor(prisma) {
         this.prisma = prisma;
         this._include = {
-            games: {
+            user: {
                 select: {
-                    game: true
+                    name: true,
                 }
             },
-            perfil: {
+            game: {
                 select: {
-                    nickname: true,
-                    image: true,
+                    titulo: true,
                 }
-            },
+            }
         };
     }
     create(data) {
-        return this.prisma.user.create({
+        return this.prisma.listOfGames.create({
+            include: this._include,
             data,
-            include: this._include
         });
     }
     findAll() {
-        return this.prisma.user.findMany();
+        return this.prisma.listOfGames.findMany();
     }
-    findOne(idUser) {
-        return this.prisma.user.findUnique({
-            where: { idUser }
+    findOne(id) {
+        return this.prisma.listOfGames.findUnique({
+            where: { id },
         });
     }
-    update(id, updateUserDto) {
-        return `This action updates a #${id} user`;
+    update(id, data) {
+        return this.prisma.listOfGames.update({
+            where: { id },
+            data,
+        });
     }
     remove(id) {
-        return `This action removes a #${id} user`;
+        return this.prisma.listOfGames.delete({
+            where: { id },
+        });
     }
 };
-UserService = __decorate([
+ListOfGamesService = __decorate([
     (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [prisma_service_1.PrismaService])
-], UserService);
-exports.UserService = UserService;
-//# sourceMappingURL=user.service.js.map
+], ListOfGamesService);
+exports.ListOfGamesService = ListOfGamesService;
+//# sourceMappingURL=list-of-games.service.js.map

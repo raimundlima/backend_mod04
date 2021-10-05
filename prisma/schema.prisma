@@ -18,17 +18,18 @@ model User {
   senha       String
   email       String    @unique
   cpf         String    @db.Char(11) @unique
+  games       ListOfGames[]
   perfis      Perfil[]
 
 }
 
 model Perfil {
-  idProfile   Int     @id @default(autoincrement())
+  idPerfil    Int     @id @default(autoincrement())
   nickname    String
-  image       String
+  image       String?
   user        User    @relation(fields: [userId], references: [idUser], onDelete: Cascade, onUpdate: Cascade)
   userId      Int
-  games       Games[]
+  
 
 }
 
@@ -39,7 +40,7 @@ model Games {
   description   String
   year          Int
   linkyt        String
-  profile       Perfil[]
+  users         ListOfGames[]
   genre         Genre[]
 }
 
@@ -47,4 +48,13 @@ model Genre {
   idGenre Int     @id @default(autoincrement())
   name    String
   games   Games[]
+}
+
+model ListOfGames {
+  id          Int       @id @default(autoincrement())
+  user        User     @relation(fields:[userId],references:[idUser],onDelete:Cascade,onUpdate:Cascade) 
+  userId      Int
+  game        Games     @relation(fields:[gameId],references:[idGame],onDelete:Cascade,onUpdate:Cascade)
+  gameId      Int
+
 }

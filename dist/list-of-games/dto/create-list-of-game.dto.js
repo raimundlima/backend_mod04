@@ -9,34 +9,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateUserDto = void 0;
+exports.CreateListOfGameDto = void 0;
 const class_validator_1 = require("class-validator");
-const user_entity_1 = require("../entities/user.entity");
-class CreateUserDto extends user_entity_1.User {
+const list_of_game_entity_1 = require("../entities/list-of-game.entity");
+class CreateListOfGameDto extends list_of_game_entity_1.ListOfGames {
 }
 __decorate([
-    (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", String)
-], CreateUserDto.prototype, "name", void 0);
-__decorate([
-    (0, class_validator_1.IsString)(),
-    (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", String)
-], CreateUserDto.prototype, "sobrenome", void 0);
-__decorate([
     (0, class_validator_1.IsInt)(),
-    (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", String)
-], CreateUserDto.prototype, "senha", void 0);
+    __metadata("design:type", Number)
+], CreateListOfGameDto.prototype, "userId", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", String)
-], CreateUserDto.prototype, "email", void 0);
-__decorate([
     (0, class_validator_1.IsInt)(),
-    (0, class_validator_1.IsOptional)(),
-    __metadata("design:type", String)
-], CreateUserDto.prototype, "cpf", void 0);
-exports.CreateUserDto = CreateUserDto;
-//# sourceMappingURL=create-user.dto.js.map
+    __metadata("design:type", Number)
+], CreateListOfGameDto.prototype, "gameId", void 0);
+exports.CreateListOfGameDto = CreateListOfGameDto;
+//# sourceMappingURL=create-list-of-game.dto.js.map
